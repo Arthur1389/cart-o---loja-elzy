@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elzy Moda Íntima</title>
+<meta name="description" content="Cartão de apresentação digital da Elzy Moda Íntima.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🌸%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Jost:wght@400;500&family=Poppins:wght@400;500&display=swap">
+<style>
+:root{--bg:#FDEEF6;--ink:#3A0A24;--mut:#8A5473;--line:#F2C4DC;--field:#fff;--pink:#E3288A;--deep:#B8156E;--btn:#C91E78;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1F0A16;--ink:#FBE6F1;--mut:#D9A3C0;--line:#4D1F37;--field:#2A0F1E}}
+:root[data-theme="dark"]{--bg:#1F0A16;--ink:#FBE6F1;--mut:#D9A3C0;--line:#4D1F37;--field:#2A0F1E}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Jost,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:28px 18px 48px;display:grid;gap:28px;grid-template-columns:1fr}
+@media(min-width:820px){.wrap{grid-template-columns:1fr 370px;align-items:start}.view .wrap{grid-template-columns:370px;justify-content:center}}
+h1{font:600 2rem/1.1 "Bodoni Moda",Georgia,serif;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 20px}
+label{display:block;font-weight:500;font-size:.9rem;margin:14px 0 4px}
+input{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+input:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.gen{font-size:.78rem;color:var(--mut);margin:3px 2px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gen:empty{display:none}
+.sticky{position:sticky;top:calc(16px + env(safe-area-inset-top,0px))}
+.card{background:#fff;color:#3A0A24;border-radius:22px;padding:34px 24px 24px;text-align:center;border-top:8px solid var(--pink);box-shadow:0 22px 44px -22px rgba(201,30,120,.55)}
+.logo{width:170px;max-width:60%;height:auto;color:var(--pink);display:block;margin:0 auto}
+.tag{margin:18px 0 0;font:500 1rem/1.4 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--deep)}
+.info{margin:14px 0 0;font-size:.9rem;color:#6B3A55}
+.info p{margin:2px 0}
+.links{display:grid;gap:8px;margin-top:22px}
+.links a{display:block;border:1.5px solid var(--btn);color:var(--deep);text-decoration:none;padding:12px 14px;border-radius:999px;font-weight:500;transition:background .15s,color .15s}
+.links a:hover{background:var(--btn);color:#fff}
+.links a.main{background:var(--btn);color:#fff}
+.links a.main:hover{background:var(--deep)}
+.empty{color:#6B3A55;font-size:.9rem;margin:20px 0 0}
+.btn{margin-top:4px;width:100%;font:inherit;font-weight:500;padding:12px;border-radius:999px;border:0;background:var(--btn);color:#fff;cursor:pointer}
+.msg{min-height:1.3em;margin:8px 0 0;font-size:.85rem;color:var(--mut);text-align:center}
+.mine{display:none;text-align:center;margin-top:16px;color:var(--mut);font-size:.9rem}
+.view .editor,.view .btn,.view .msg{display:none}
+.view .mine{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="editor">
+    <h1>Cartão de apresentação da Elzy</h1>
+    <p class="sub">Preencha o que quiser mostrar. Os links são gerados sozinhos.</p>
+    <label for="r">Frase da loja</label><input id="r" maxlength="70" placeholder="Conforto e delicadeza em cada peça">
+    <label for="a">Endereço</label><input id="a" autocomplete="street-address" placeholder="Rua, número, bairro e cidade">
+    <div id="gen-a" class="gen"></div>
+    <label for="h">Horário de atendimento</label><input id="h" placeholder="Seg a sáb, 9h às 18h">
+    <div id="fields"></div>
+  </section>
+  <aside class="sticky">
+    <div class="card" id="card"></div>
+    <button class="btn" id="share" type="button">Copiar link do cartão da Elzy</button>
+    <p class="msg" id="msg" role="status"></p>
+    
+  </aside>
+</div>
+<template id="logo"><svg class="logo" viewBox="0 0 658.96 537.00" role="img" aria-label="Elzy Moda Íntima" xmlns="http://www.w3.org/2000/svg"> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 4.19 517.86 L 4.19 535.63 L 0.59 535.63 L 0.59 509 L 5.91 509 L 13.85 527.46 C 14.13 528.21 14.40 529.00 14.66 529.85 C 14.92 530.70 15.10 531.32 15.18 531.70 C 15.26 531.35 15.41 530.89 15.60 530.29 C 15.80 529.69 16.00 529.11 16.20 528.56 C 16.40 528.00 16.54 527.64 16.62 527.46 L 24.42 509 L 29.61 509 L 29.61 535.63 L 25.96 535.63 L 25.96 517.86 C 25.96 516.88 25.98 515.92 26.02 514.97 C 26.05 514.03 26.10 513.10 26.16 512.19 C 25.80 513.32 25.47 514.32 25.17 515.21 C 24.87 516.10 24.57 516.85 24.29 517.48 L 16.58 535.63 L 13.74 535.63 L 5.92 517.48 L 4.04 512.19 C 4.07 513.14 4.10 514.08 4.14 515.03 C 4.17 515.97 4.19 516.92 4.19 517.86 "/> </g> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 50.03 525.38 C 50.03 522.56 49.57 520.51 48.63 519.23 C 47.69 517.95 46.11 517.31 43.89 517.31 C 41.66 517.31 40.05 517.96 39.05 519.27 C 38.06 520.57 37.56 522.61 37.56 525.38 C 37.56 528.08 38.05 530.11 39.03 531.46 C 40.01 532.82 41.56 533.49 43.66 533.49 C 45.95 533.49 47.58 532.84 48.56 531.53 C 49.55 530.22 50.03 528.17 50.03 525.38 M 54.04 525.38 C 54.04 528.96 53.16 531.63 51.39 533.38 C 49.62 535.13 47.06 536.01 43.70 536.01 C 40.35 536.01 37.83 535.10 36.12 533.28 C 34.41 531.46 33.55 528.82 33.55 525.38 C 33.55 521.85 34.41 519.21 36.13 517.44 C 37.85 515.68 40.41 514.80 43.83 514.80 C 47.33 514.80 49.91 515.66 51.56 517.38 C 53.21 519.10 54.04 521.77 54.04 525.38 "/> </g> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 60.25 525.38 C 60.25 528.25 60.68 530.29 61.53 531.53 C 62.37 532.76 63.75 533.38 65.66 533.38 C 67.82 533.38 69.38 532.71 70.36 531.37 C 71.33 530.04 71.82 527.97 71.82 525.16 C 71.82 522.45 71.33 520.46 70.36 519.20 C 69.38 517.94 67.83 517.31 65.70 517.31 C 63.78 517.31 62.39 517.94 61.54 519.21 C 60.68 520.48 60.25 522.53 60.25 525.38 M 72.12 535.63 C 72.09 535.49 72.06 535.23 72.02 534.84 C 71.99 534.46 71.96 534.03 71.94 533.57 C 71.91 533.10 71.91 532.69 71.91 532.34 L 71.82 532.34 C 71.12 533.65 70.18 534.59 69.01 535.16 C 67.85 535.72 66.41 536.01 64.68 536.01 C 61.78 536.01 59.66 535.14 58.30 533.40 C 56.93 531.66 56.25 529.03 56.25 525.50 C 56.25 521.93 56.95 519.26 58.36 517.48 C 59.76 515.69 61.87 514.80 64.68 514.80 C 66.42 514.80 67.87 515.08 69.02 515.65 C 70.18 516.22 71.12 517.12 71.82 518.35 L 71.86 518.35 L 71.82 516.07 L 71.82 507.58 L 75.63 507.58 L 75.63 531.41 C 75.63 532.48 75.64 533.37 75.66 534.07 C 75.69 534.77 75.72 535.29 75.76 535.63 Z M 72.12 535.63 "/> </g> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 94.01 525.53 L 89.83 525.61 C 88.05 525.62 86.70 525.79 85.77 526.10 C 84.83 526.41 84.12 526.87 83.63 527.50 C 83.13 528.13 82.89 528.96 82.89 529.98 C 82.89 531.08 83.22 531.94 83.89 532.55 C 84.56 533.16 85.52 533.45 86.76 533.45 C 88.17 533.45 89.42 533.17 90.49 532.60 C 91.58 532.04 92.43 531.26 93.06 530.27 C 93.69 529.28 94.01 528.26 94.01 527.22 Z M 85.89 536.01 C 83.59 536.01 81.86 535.46 80.71 534.38 C 79.55 533.30 78.97 531.81 78.97 529.92 C 78.97 527.80 79.75 526.18 81.31 525.05 C 82.87 523.91 85.39 523.30 88.86 523.23 L 94.01 523.16 L 94.01 522.04 C 94.01 520.38 93.61 519.18 92.82 518.47 C 92.03 517.75 90.78 517.39 89.09 517.39 C 87.38 517.39 86.14 517.65 85.37 518.16 C 84.59 518.68 84.12 519.51 83.96 520.64 L 79.98 520.32 C 80.63 516.64 83.70 514.80 89.17 514.80 C 92.06 514.80 94.23 515.39 95.68 516.57 C 97.13 517.75 97.86 519.45 97.86 521.68 L 97.86 530.49 C 97.86 531.5 98.01 532.25 98.31 532.76 C 98.60 533.28 99.17 533.53 100.00 533.53 C 100.40 533.53 100.81 533.49 101.25 533.40 L 101.25 535.51 C 100.77 535.62 100.28 535.69 99.79 535.74 C 99.29 535.79 98.80 535.82 98.31 535.82 C 96.89 535.82 95.87 535.49 95.23 534.83 C 94.58 534.16 94.22 533.13 94.13 531.71 L 94.01 531.71 C 93.03 533.28 91.90 534.38 90.61 535.03 C 89.32 535.68 87.75 536.01 85.89 536.01 "/> </g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 118.49 535.63 L 114.44 535.63 L 114.44 509 L 118.49 509 Z M 122.43 502.61 L 115.86 506.71 L 113.45 506.71 L 113.45 506.33 L 118.04 502.06 L 122.43 502.06 Z M 122.43 502.61 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 127.88 523.78 L 127.88 535.63 L 124.07 535.63 L 124.07 519.55 C 124.07 518.35 124.06 517.39 124.04 516.66 C 124.02 515.94 123.99 515.44 123.94 515.18 L 127.55 515.18 C 127.57 515.42 127.60 515.72 127.62 516.08 C 127.64 516.45 127.66 516.85 127.67 517.29 C 127.69 517.74 127.70 518.19 127.71 518.67 L 127.78 518.67 C 128.65 517.26 129.67 516.26 130.82 515.68 C 131.97 515.09 133.40 514.80 135.10 514.80 C 137.62 514.80 139.46 515.37 140.62 516.52 C 141.79 517.67 142.37 519.5 142.37 522.00 L 142.37 535.63 L 138.54 535.63 L 138.54 522.66 C 138.54 520.71 138.19 519.35 137.48 518.58 C 136.77 517.81 135.55 517.43 133.82 517.43 C 131.98 517.43 130.53 517.99 129.47 519.11 C 128.41 520.23 127.88 521.78 127.88 523.78 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 155.49 535.48 C 154.25 535.78 152.96 535.93 151.64 535.93 C 150.11 535.93 148.97 535.54 148.21 534.77 C 147.44 534 147.06 532.84 147.06 531.30 L 147.06 517.66 L 144.41 517.66 L 144.41 515.18 L 147.21 515.18 L 148.33 510.60 L 150.87 510.60 L 150.87 515.18 L 155.11 515.18 L 155.11 517.66 L 150.87 517.66 L 150.87 530.56 C 150.87 531.55 151.05 532.24 151.42 532.63 C 151.78 533.03 152.40 533.23 153.29 533.23 C 153.77 533.23 154.50 533.14 155.49 532.96 Z M 155.49 535.48 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 161.09 535.63 L 157.28 535.63 L 157.28 515.18 L 161.09 515.18 Z M 161.09 510.83 L 157.28 510.83 L 157.28 507.58 L 161.09 507.58 Z M 161.09 510.83 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 169.38 523.78 L 169.38 535.63 L 165.59 535.63 L 165.59 519.55 C 165.59 518.35 165.58 517.39 165.56 516.66 C 165.54 515.94 165.51 515.44 165.47 515.18 L 169.07 515.18 C 169.10 515.46 169.12 515.80 169.15 516.20 C 169.18 516.60 169.20 517.02 169.21 517.46 C 169.23 517.89 169.24 518.30 169.24 518.67 L 169.30 518.67 C 170.12 517.23 171.06 516.22 172.12 515.65 C 173.17 515.08 174.47 514.80 176 514.80 C 177.73 514.80 179.10 515.11 180.12 515.73 C 181.12 516.34 181.82 517.33 182.22 518.67 L 182.28 518.67 C 183.07 517.30 184.03 516.31 185.16 515.71 C 186.28 515.10 187.64 514.80 189.23 514.80 C 191.55 514.80 193.23 515.36 194.28 516.48 C 195.33 517.60 195.86 519.44 195.86 522.00 L 195.86 535.63 L 192.09 535.63 L 192.09 522.66 C 192.09 520.69 191.79 519.32 191.18 518.56 C 190.57 517.81 189.48 517.43 187.90 517.43 C 186.23 517.43 184.94 517.98 184.01 519.08 C 183.09 520.18 182.62 521.75 182.62 523.78 L 182.62 535.63 L 178.85 535.63 L 178.85 522.66 C 178.85 520.69 178.55 519.32 177.94 518.56 C 177.33 517.81 176.24 517.43 174.66 517.43 C 173.03 517.43 171.75 517.98 170.80 519.09 C 169.86 520.20 169.38 521.76 169.38 523.78 "/> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 214.17 525.53 L 210.00 525.61 C 208.22 525.62 206.87 525.79 205.93 526.10 C 205.00 526.41 204.29 526.87 203.79 527.50 C 203.30 528.13 203.05 528.96 203.05 529.98 C 203.05 531.08 203.39 531.94 204.06 532.55 C 204.73 533.16 205.69 533.45 206.93 533.45 C 208.34 533.45 209.58 533.17 210.66 532.60 C 211.75 532.04 212.60 531.26 213.23 530.27 C 213.86 529.28 214.17 528.26 214.17 527.22 Z M 206.06 536.01 C 203.76 536.01 202.03 535.46 200.87 534.38 C 199.71 533.30 199.14 531.81 199.14 529.92 C 199.14 527.80 199.91 526.18 201.47 525.05 C 203.03 523.91 205.55 523.30 209.03 523.23 L 214.17 523.16 L 214.17 522.04 C 214.17 520.38 213.78 519.18 212.99 518.47 C 212.19 517.75 210.95 517.39 209.26 517.39 C 207.55 517.39 206.31 517.65 205.53 518.16 C 204.75 518.68 204.29 519.51 204.13 520.64 L 200.15 520.32 C 200.80 516.64 203.87 514.80 209.34 514.80 C 212.23 514.80 214.39 515.39 215.85 516.57 C 217.30 517.75 218.03 519.45 218.03 521.68 L 218.03 530.49 C 218.03 531.5 218.17 532.25 218.47 532.76 C 218.77 533.28 219.33 533.53 220.17 533.53 C 220.56 533.53 220.98 533.49 221.42 533.40 L 221.42 535.51 C 220.94 535.62 220.45 535.69 219.96 535.74 C 219.46 535.79 218.97 535.82 218.47 535.82 C 217.06 535.82 216.03 535.49 215.39 534.83 C 214.75 534.16 214.39 533.13 214.30 531.71 L 214.17 531.71 C 213.20 533.28 212.07 534.38 210.77 535.03 C 209.48 535.68 207.91 536.01 206.06 536.01 "/> </g> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 142.58 427.30 L 136.29 477.93 L 0.59 477.93 L 0.59 477.03 C 3.18 475.43 5.38 473.14 7.18 470.14 C 8.98 467.14 10.48 463.75 11.67 459.95 C 12.87 456.16 13.72 452.07 14.22 447.67 C 14.72 443.28 14.97 438.89 14.97 434.49 L 14.97 311.67 C 14.97 302.88 13.87 294.44 11.67 286.35 C 9.47 278.27 5.78 272.53 0.59 269.13 L 0.59 268.23 L 136.29 268.23 L 125.81 313.17 L 124.91 313.17 C 124.11 307.58 122.86 302.43 121.16 297.74 C 119.46 293.05 117.02 288.95 113.82 285.46 C 110.63 281.96 106.53 279.27 101.54 277.37 C 96.55 275.47 90.26 274.52 82.67 274.52 L 54.51 274.52 L 54.51 375.78 L 71.89 375.78 C 80.67 375.78 88.36 373.98 94.95 370.38 C 101.54 366.79 106.64 361.10 110.23 353.31 L 111.13 353.31 L 102.14 404.23 L 101.24 404.23 C 98.64 389.66 89.36 382.27 73.39 382.07 L 54.51 382.07 L 54.51 471.64 L 84.17 471.64 C 90.76 471.64 97.10 470.49 103.19 468.19 C 109.28 465.90 114.87 462.75 119.96 458.76 C 125.06 454.76 129.50 450.07 133.30 444.68 C 137.09 439.28 139.89 433.5 141.69 427.30 Z M 142.58 427.30 "/> </g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 297.75 427.30 L 291.46 477.93 L 155.76 477.93 L 155.76 477.03 C 158.35 475.43 160.55 473.14 162.35 470.14 C 164.15 467.14 165.65 463.75 166.84 459.95 C 168.04 456.16 168.89 452.07 169.39 447.67 C 169.89 443.28 170.14 438.89 170.14 434.49 L 170.14 311.67 C 170.14 302.88 169.04 294.44 166.84 286.35 C 164.64 278.27 160.95 272.53 155.76 269.13 L 155.76 268.23 L 224.06 268.23 L 224.06 269.13 C 218.87 272.53 215.17 278.22 212.98 286.21 C 210.78 294.19 209.58 302.68 209.38 311.67 L 209.38 471.64 L 239.34 471.64 C 245.93 471.64 252.27 470.49 258.36 468.19 C 264.45 465.90 270.05 462.75 275.14 458.76 C 280.23 454.76 284.67 450.07 288.47 444.68 C 292.26 439.28 295.06 433.5 296.86 427.30 Z M 297.75 427.30 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 457.42 477.93 L 303.44 477.93 L 303.44 471.64 L 407.99 274.52 L 362.76 274.52 C 355.37 274.52 349.17 275.47 344.18 277.37 C 339.19 279.27 335.09 281.96 331.90 285.46 C 328.71 288.95 326.31 293.05 324.71 297.74 C 323.11 302.43 321.82 307.58 320.82 313.17 L 319.92 313.17 L 309.14 268.23 L 453.53 268.23 L 453.53 274.52 L 347.78 471.64 L 405.30 471.64 C 411.89 471.64 418.22 470.49 424.32 468.19 C 430.41 465.90 436.00 462.75 441.09 458.76 C 446.19 454.76 450.63 450.07 454.42 444.68 C 458.21 439.28 461.01 433.5 462.81 427.30 L 463.71 427.30 Z M 457.42 477.93 "/> <g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 583.14 385.78 C 583.13 385.79 583.11 385.79 583.10 385.78 L 550.97 311.62 C 548.97 307.43 547.17 303.28 545.57 299.19 C 543.97 295.10 542.88 291.21 542.28 287.51 C 541.68 283.81 541.78 280.47 542.58 277.47 C 543.37 274.48 545.17 272.08 547.97 270.28 L 547.97 269.38 L 478.77 269.38 L 478.77 270.28 C 481.57 271.68 484.36 273.93 487.16 277.02 C 489.95 280.12 492.75 283.72 495.55 287.80 C 498.34 291.90 501.04 296.34 503.64 301.14 C 506.23 305.93 508.73 310.72 511.12 315.52 L 561.90 419.05 C 561.90 419.05 561.90 419.06 561.90 419.06 C 560.50 421.86 557.58 426.98 557.58 426.98 L 554.82 431.47 C 553.49 433.64 551.93 435.67 550.17 437.53 C 546.53 441.37 541.36 443.42 536.06 443.43 L 535.99 443.43 C 531.39 443.43 526.55 442.63 521.46 441.03 C 516.37 439.43 511.72 437.53 507.53 435.34 C 502.74 432.94 497.94 430.25 493.15 427.26 L 492.85 427.26 L 486.26 472.78 C 486.26 472.78 486.26 472.79 486.27 472.79 C 488.26 473.59 490.56 474.39 493.15 475.18 C 495.35 475.78 497.79 476.33 500.49 476.83 C 503.19 477.33 506.23 477.58 509.63 477.58 C 513.42 477.58 517.31 477.13 521.31 476.23 C 525.30 475.33 529.30 473.69 533.29 471.29 C 537.28 468.89 541.08 465.64 544.67 461.55 C 544.71 461.51 544.75 461.47 544.78 461.43 C 552.76 452.39 560.15 442.59 565.87 431.98 L 566.62 430.57 C 566.62 430.57 568.78 426.51 569.95 424.36 L 572.42 419.85 C 575.98 413.32 579.24 406.65 582.29 399.88 C 582.71 398.96 583.14 398.07 583.48 397.37 C 584.02 396.26 584.52 395.14 584.98 394 L 585.58 392.64 L 588.85 385.53 L 638.25 286.05 C 638.25 286.05 638.25 286.05 638.25 286.05 L 640.79 282.00 C 642.75 278.87 645.76 276.54 649.28 275.43 C 649.29 275.43 657.96 275.21 657.96 275.20 L 658.34 270.77 C 658.33 270.76 658.33 270.76 658.32 270.75 L 625.02 269.38 C 625.01 269.38 625.01 269.39 625.01 269.40 L 625.01 274.62 C 625.01 274.62 625.01 274.63 625.02 274.63 L 630.84 274.93 C 632.56 275.02 633.91 276.44 633.91 278.16 C 633.91 280.34 633.38 282.49 632.35 284.41 L 630.03 288.79 Z M 583.14 385.78 "/> </g> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 347.61 102.89 L 357.88 71.71 C 357.85 88.49 352.38 109.11 343.51 124.10 C 338.68 133.64 334.72 145.59 335.89 153.08 C 342.89 139.81 356.44 127.58 366.28 114.68 C 393.93 78.42 374.66 53.94 336.21 0 C 336.21 0 298.12 46.08 289.89 66.58 C 282.77 83.67 290.49 100.01 300.51 110.69 C 298.93 110.71 295.06 105.82 288.92 103.97 C 286.54 103.34 283.64 102 282.49 102.68 C 314.12 134.30 350.68 181.59 331.85 229.79 C 342.65 219.14 345.95 195.04 342.69 179.25 L 342.87 181.04 C 339.81 152.34 307.04 113.32 310.12 76.85 C 313.40 96.28 324.53 113.54 328.77 132.67 C 328.81 132.85 329.05 132.85 329.08 132.68 C 332.57 115.50 336.08 69.75 335.99 50.88 C 350.21 77.82 332.70 136.62 332.92 136.09 C 338.35 125.85 345.06 112.70 347.61 102.89 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 342.31 218.42 C 359.07 192.82 342.25 179.22 352.46 146.22 C 356.19 135 362.13 125.91 380.82 110.60 C 387.83 102.35 399.13 101.96 406.77 109.15 C 417.90 117.99 421.84 129.29 428.53 140.58 C 428.85 141.83 432.44 147.44 436.10 148.64 C 427.24 152.71 422.16 143.70 416.71 141.02 C 402.33 135.57 384.37 155.32 379.45 163.32 C 364.75 192.49 350.07 208.02 350.23 207.64 C 362.42 178.80 366.87 146.57 393.37 129.00 C 349.90 151.05 366.91 186.24 342.31 218.42 "/> <path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 322.58 237.66 C 329.75 219.56 331.02 201.39 326.92 183.53 C 322.76 165.36 313.00 148.98 299.59 136.03 C 288.97 125.76 274.55 114.21 262.53 111.32 C 257.28 110.05 251.80 112.20 248.82 116.71 L 248.76 116.79 C 247.04 119.40 245.78 120.78 244.64 121.90 C 241.50 125.00 238.97 128.69 237.46 132.83 C 234.61 140.63 236.49 144.21 226.83 155.48 C 225.14 157.34 222.89 158.60 220.43 159.10 C 218.96 159.40 217.42 159.66 216.53 159.66 C 223.70 177.81 244.82 164.47 249.57 158.37 C 253.76 150.86 278.34 161.65 282.16 163.37 C 300.33 172.98 319.15 207.78 320.32 223.96 C 321.72 230.57 321.48 233.64 321.94 233.63 C 324.12 221.19 323.16 187.35 306.34 171.69 C 305.50 170.91 304.28 170.02 302.92 169.14 C 296.95 165.24 291.75 160.25 287.81 154.30 C 287.15 153.31 286.57 152.38 286.16 151.60 C 285.32 151.35 296.51 160.30 306.68 166.80 C 312.08 170.26 316.27 175.33 318.69 181.28 C 325.89 199 324.07 218.78 322.58 237.66 "/> <path fill="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(89.01%, 15.68%, 54.11%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.00 -0.00 C 0.00 -0.00 -5.74 6.39 -9.42 9.58 C -16.22 15.48 -24.77 20.43 -35.29 26.17 C -59.59 39.45 -82.46 42.81 -95.82 43.74 C -93.08 44.36 -90.03 44.77 -86.91 45.03 C -73.94 46.13 -60.87 44.29 -48.58 39.99 C -46.80 39.37 -45.57 38.96 -45.54 38.99 C -45.54 38.99 -45.32 41.79 -44.46 43.46 C -43.02 46.28 -38.05 46.83 -34.07 45.55 C -29.03 43.94 -29.09 38.25 -28.39 31.73 L -14.83 16.81 L -10.46 11.86 L -4.84 5.50 L 0.00 6.25 L -1.64 5.59 " transform="matrix(0.99, 0, 0, -0.99, 309.53, 132.68)"/> </svg> </template>
+<script>
+var clean=function(v){return v.trim().replace(/^@/,'').replace(/^https?:\/\/[^\/]+\//,'').replace(/\/+$/,'')};
+var isUrl=function(v){return /^https?:\/\//i.test(v.trim())};
+var dig=function(v){return v.replace(/\D/g,'')};
+var P=[
+ {k:'wa',l:'Falar no WhatsApp',main:1,ph:'(11) 99999-9999',f:function(v){var d=dig(v);if(d.length<=11)d='55'+d;return 'https://wa.me/'+d+'?text='+encodeURIComponent('Olá, vi o cartão da loja e gostaria de conhecer as novidades.')}},
+ {k:'site',l:'Loja virtual',ph:'sualoja.com.br',f:function(v){return isUrl(v)?v.trim():'https://'+v.trim()}},
+ {k:'ig',l:'Instagram',ph:'@sualoja',f:function(v){return 'https://instagram.com/'+clean(v)}},
+ {k:'tt',l:'TikTok',ph:'@sualoja',f:function(v){return 'https://tiktok.com/@'+clean(v)}},
+ {k:'tel',l:'Ligar para a loja',ph:'(11) 3333-4444',f:function(v){var d=dig(v);return 'tel:+'+(d.length<=11?'55':'')+d}}
+];
+var DEF={r:'Conforto para cada momento do seu dia',a:'R. Alto do Tanque, 1002 - Nossa Sra. das Graças - Santa Luzia - MG, 33030-242',h:'Seg a sex 09:00 às 18:00 | Sáb 08:00 às 13:00',d:{wa:'31986808151',ig:'lojaelzymodaintima'}};
+var S=JSON.parse(JSON.stringify(DEF));
+var $=function(id){return document.getElementById(id)};
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function mapUrl(a){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(a.trim())}
+function load(){
+  try{var h=location.hash.slice(1);if(!h)return false;
+    var o=JSON.parse(decodeURIComponent(escape(atob(h))));
+    S.r=String(o.r||'');S.a=String(o.a||'');S.h=String(o.h||'');S.d=o.d&&typeof o.d==='object'?o.d:{};return true}
+  catch(e){return false}
+}
+function render(){
+  var c=$('card');c.textContent='';
+  c.appendChild($('logo').content.cloneNode(true));
+  if(S.r)c.appendChild(el('p','tag',S.r));
+  if(S.a||S.h){var i=el('div','info');if(S.a)i.appendChild(el('p','',S.a));if(S.h)i.appendChild(el('p','',S.h));c.appendChild(i)}
+  var box=el('div','links'),any=false;
+  function add(label,u,main,file){var a=el('a',main?'main':'',label);a.href=u;a.target='_blank';a.rel='noopener noreferrer';box.appendChild(a);any=true}
+  P.forEach(function(p,n){
+    var v=(S.d[p.k]||'').trim();var g=$('g-'+p.k);
+    if(!v){if(g)g.textContent=''}
+    else{var u;try{u=p.f(v)}catch(e){u=null}
+      if(u){if(g)g.textContent=u;add(p.l,u,p.main)}}
+    
+  });
+  var ga=$('gen-a');
+  if(S.a.trim()){add('Como chegar',mapUrl(S.a));if(ga)ga.textContent=mapUrl(S.a)}else if(ga)ga.textContent='';
+  c.appendChild(any?box:el('p','empty','Adicione o WhatsApp, o Instagram e o endereço para mais botões aparecerem aqui.'));
+}
+function build(){
+  var f=$('fields');
+  P.forEach(function(p){
+    var l=el('label','',p.l);l.htmlFor='f-'+p.k;
+    var i=el('input');i.id='f-'+p.k;i.placeholder=p.ph;i.autocomplete='off';
+    i.addEventListener('input',function(){S.d[p.k]=i.value;render()});
+    f.appendChild(l);f.appendChild(i);var g=el('div','gen');g.id='g-'+p.k;f.appendChild(g);
+  });
+  ['r','a','h'].forEach(function(k){$(k).addEventListener('input',function(e){S[k]=e.target.value;render()})});
+}
+function shareUrl(){
+  var o={r:S.r,a:S.a,h:S.h,d:{}};
+  P.forEach(function(p){if((S.d[p.k]||'').trim())o.d[p.k]=S.d[p.k].trim()});
+  return location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+}
+$('share').addEventListener('click',function(){
+  var u=shareUrl(),m=$('msg');
+  var ok=function(){m.textContent='Link copiado. Use na bio do Instagram, no status do WhatsApp ou num QR code na vitrine.'};
+  var no=function(){m.textContent='Não foi possível copiar. Copie o endereço que aparece na barra do navegador.';location.hash=u.split('#')[1]};
+  try{navigator.clipboard.writeText(u).then(ok,no)}catch(e){no()}
+});
+if(location.hash==='#editar'){
+  build();
+  ['r','a','h'].forEach(function(k){$(k).value=S[k]});
+  P.forEach(function(p){var i=$('f-'+p.k);if(i)i.value=S.d[p.k]||''});
+}else{
+  document.body.classList.add('view');
+  if(location.hash.length>1)load();
+}
+render();
+</script>
+</body>
+</html>
